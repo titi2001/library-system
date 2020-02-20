@@ -11,7 +11,7 @@ import java.util.Arrays;
 @RestController
 public class HomeController {
     private UserServiceImpl userService;
-    private String[] admins = {"AccountThesis"};
+    private String[] admins = {};
     public HomeController(UserServiceImpl userService) {
         this.userService = userService;
     }

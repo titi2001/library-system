@@ -103,8 +103,8 @@ public class UserController {
 
     public Twitter getTwitter() {
         Twitter twitter = null;
-        String consumerKey = "nWgNOIVgIVEBL911MIhHuzVGi";
-        String consumerSecret = "3BWI48tKyWz89PjYgmqLd5Nq0F32qW1YiBcsURr8qMpGTAEizi";
+        String consumerKey = "";
+        String consumerSecret = "";
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.setOAuthConsumerKey(consumerKey);
         builder.setOAuthConsumerSecret(consumerSecret);
