@@ -1,74 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4911990f-900e-4812-ab36-4fba915fcf5f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/library-system.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4911990f-900e-4812-ab36-4fba915fcf5f" name="Default" comment="final update; fixing things from review">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/LibraryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/LibraryApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/BookListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/BookListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/HomeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/QuoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/QuoteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/Author.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/BookList.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/BookList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/Quote.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/Quote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddAuthor.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddAuthor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddBookList.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddBookList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddQuote.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/AddQuote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/EditBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/EditBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/Genre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/pojo/SearchQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/AuthorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/AuthorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/BookListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/BookListRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/BookRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/QuoteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/repositories/QuoteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/AuthorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/AuthorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/BookListServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/BookListServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/BookServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/QuoteServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/QuoteServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/interfaces/IBookListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/interfaces/IBookListService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/interfaces/IBookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/interfaces/IBookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/interfaces/IQuoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/java/com/georgiev/library/services/interfaces/IQuoteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/admin/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/epubs/АлхимикътМайкъл СкотMichael_Scott_-_TnbNF_-_1.00._Alhimikyt-24144.epub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/epubs/Безследно ИзчезналСандра БраунSandra_Brown_-_Bezsledno_izcheznal-28464.epub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/epubs/Игрите на гладаСюзан КолинсSuzanne_Collins_-_Ing_-_1.00._Igrite_na_glada-26631.epub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/epubs/Озарена от любовКатрин КаултърCatherine_Coulter_-_Ozarena_ot_ljubov-24156.epub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/epubs/ОркиСтен НикълсStan_Nicholls_-_OPk_-_1.00._Paziteljat_na_svetkavitsata-16097.epub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/epubs/ТайнатаСандра БраунSandra_Brown_-_Tajnata-11238.epub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/epubs/Хари Потър и Философският КамъкДжоан РоулингJoanne_Rowling_-_HP_-_1.00._Hari_Potyr_i_filosofskijat_kamyk-432.epub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/images/АлхимикътМайкъл Скотизтеглен файл (2).jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/images/Безследно ИзчезналСандра Браунизтеглен файл (6).jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/images/Игрите на гладаСюзан Колинсизтеглен файл.jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/images/Озарена от любовКатрин Каултъризтеглен файл (5).jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/images/ОркиСтен Никълсизтеглен файл (3).jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/images/ТайнатаСандра Браунизтеглен файл (7).jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/bookFiles/images/Хари Потър и Философският КамъкДжоан Роулингизтеглен файл (4).jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/css/admin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/js/Admin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/js/home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/view/bookDisplay.html" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/view/bookDisplay.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/view/bookList.html" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/view/bookList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/view/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/view/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/view/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/view/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/view/searchResults.html" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/view/searchResults.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library-system/src/main/resources/static/view/textHolder.html" beforeDir="false" afterPath="$PROJECT_DIR$/library-system/src/main/resources/static/view/textHolder.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,6 +102,21 @@
       <option name="presentableId" value="Default" />
       <updated>1582037500022</updated>
     </task>
+    <task id="LOCAL-00001" summary="final update; fixing things from review">
+      <created>1592075836405</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592075836405</updated>
+    </task>
+    <task id="LOCAL-00002" summary="final update; fixing things from review">
+      <created>1592075901026</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592075901026</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -182,6 +131,10 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="final update; fixing things from review" />
+    <option name="LAST_COMMIT_MESSAGE" value="final update; fixing things from review" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1591991817806">
       <screen x="0" y="0" width="1536" height="824" />
@@ -191,10 +144,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1590334927998" />
-    <state x="209" y="6" key="CommitChangelistDialog2" timestamp="1592075829616">
+    <state x="209" y="6" key="CommitChangelistDialog2" timestamp="1592075899893">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="209" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592075829616" />
+    <state x="209" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592075899893" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585330484643">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -239,10 +192,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1585330623369" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592075842689">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592075905603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592075842689" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592075905603" />
     <state x="470" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1592051387557">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
