@@ -5,6 +5,9 @@ import com.georgiev.library.entities.Quote;
 import com.georgiev.library.services.impl.BookServiceImpl;
 import com.georgiev.library.services.impl.QuoteServiceImpl;
 import com.georgiev.library.services.impl.UserServiceImpl;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -24,31 +27,34 @@ public class QuoteController {
         this.bookService = bookService;
         this.userService = userService;
     }
-
-    @PostMapping("/add")
-    public ResponseEntity<?> addQuote(@RequestBody AddQuote quote) throws Exception {
-        if(quoteService.createQuote(quote)){
-            LOGGER.info("Quote added!");
-            userService.setUser(userService.getUser(userService.getUser().getId()));
-            return new ResponseEntity<String>("Uploaded", HttpStatus.OK);}
-        LOGGER.info("Quote not added!");
-        return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
+    public boolean isAuthenticated(String token) {
+        Jws < Claims > jwt = Jwts.parser()
+                .setSigningKey("")
+                .parseClaimsJws(token);
+        return userService.getUser(Integer.parseInt((String) jwt.getBody().get("id"))) != null;
     }
-    @GetMapping("/get/{id}")
-    public Quote getQuote(@PathVariable("id") String id){
-        Quote quote = quoteService.getQuote(Integer.parseInt(id));
-        /*if(quote != null){
-            quote.getUser().setBookLists(null);
-            quote.getUser().setQuotes(null);
-            quote.getUser().setDownloadedBooks(null);
-            quote.getUser().setFinishedBooks(null);
-            quote.getUser().setStartedBooks(null);
-            for (Author author:
-                 quote.getBook().getAuthors()) {
-                author.setBooks(null);
+    @GetMapping("/")
+    public Quote getQuote(@RequestParam("id") String id, @RequestParam("token") String token) {
+        if (isAuthenticated(token)) {
+            Quote quote = quoteService.getQuote(Integer.parseInt(id));
+            return quote;
+        }
+        return null;
+    }
+
+    @PostMapping("/")
+    public ResponseEntity < ? > addQuote(@RequestBody AddQuote quote, @RequestParam("token") String token) throws Exception {
+        Jws < Claims > jwt = Jwts.parser()
+                .setSigningKey("")
+                .parseClaimsJws(token);
+        if (userService.getUser(Integer.parseInt((String) jwt.getBody().get("id"))) != null) {
+            quote.setUserId(Integer.parseInt((String) jwt.getBody().get("id")));
+            if (quoteService.createQuote(quote)) {
+                LOGGER.info("Quote added!");
+                return new ResponseEntity < String > ("Uploaded", HttpStatus.OK);
             }
-            quote.getBook().setBookLists(null);
-        }*/
-        return quote;
+        }
+        LOGGER.info("Quote not added!");
+        return new ResponseEntity < String > ("Error", HttpStatus.BAD_REQUEST);
     }
 }

@@ -30,19 +30,19 @@ public class BookServiceImpl implements IBookService {
         Book b = new Book();
         b.setTitle(book.getTitle());
         b.setDescription(book.getDescription());
-        Set<Author> a = new HashSet<>();
+        Set < Author > a = new HashSet < > ();
         for (String name:
-             book.getAuthors()) {
-            if(authorService.getAuthorByName(name) == null){
-                authorService.createAuthor(new AddAuthor(name, new ArrayList<>()));
+                book.getAuthors()) {
+            if (authorService.getAuthorByName(name) == null) {
+                authorService.createAuthor(new AddAuthor(name));
             }
             a.add(authorService.getAuthorByName(name));
 
         }
         b.setAuthors(a);
         b.setGenre(Genre.valueOf(book.getGenre().toUpperCase()));
-        b.setImageName(book.getTitle()+book.getAuthors().get(0)+book.getImageFile()[0].getOriginalFilename());
-        b.setFileName(book.getTitle()+book.getAuthors().get(0)+book.getBookFile()[0].getOriginalFilename());
+        b.setImageName(book.getTitle() + book.getAuthors().get(0) + book.getImageFile()[0].getOriginalFilename());
+        b.setFileName(book.getTitle() + book.getAuthors().get(0) + book.getBookFile()[0].getOriginalFilename());
         return bookRepository.save(b) != null;
     }
 
@@ -55,34 +55,28 @@ public class BookServiceImpl implements IBookService {
     public boolean deleteBook(int id) {
         long check = bookRepository.count();
         Book book = this.getBook(id);
-        for (Author author:
-             book.getAuthors()) {
-            author.getBooks().remove(book);
-            authorService.editAuthor(author);
-        }
-        for (Quote quote:
-             book.getQuotes()) {
-            quoteService.deleteQuote(quote.getId());
-        }
-        for (BookList bookList:
-             book.getBookLists()) {
-            bookList.getBooks().remove(book);
-            bookListService.editBookList(bookList);
-        }
-        book.setQuotes(null);
         book.setAuthors(null);
         for (User user:
-             userService.getAllUsers()) {
-            if(user.getStartedBooks().contains(book)){
+                userService.getAllUsers()) {
+            if (user.getStartedBooks().contains(book)) {
                 user.getStartedBooks().remove(book);
             }
-            if(user.getFinishedBooks().contains(book)){
+            if (user.getFinishedBooks().contains(book)) {
                 user.getFinishedBooks().remove(book);
             }
-            if(user.getDownloadedBooks().contains(book)){
+            if (user.getDownloadedBooks().contains(book)) {
                 user.getDownloadedBooks().remove(book);
             }
             userService.editUser(user);
+        }
+        for (BookList bookList:
+                bookListService.getBookListsByBook(book.getId())) {
+            bookList.getBooks().remove(book);
+            bookListService.editBookList(bookList);
+        }
+        for (Quote quote:
+             quoteService.getQuotesFromBook(id)) {
+            quoteService.deleteQuote(quote.getId());
         }
         this.editBook(book);
         bookRepository.deleteById(id);
@@ -100,47 +94,42 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public List<Book> getAllBooks() {
+    public List < Book > getAllBooks() {
         return bookRepository.findAll();
     }
 
     @Override
-    public List<Book> searchBooks(SearchQuery searchQuery) throws SQLException {
-        List<Book> result = new ArrayList<>();
-        List<Book> booksByTitle = new ArrayList<>();
-        List<Book> booksByAuthor = new ArrayList<>();
-        List<Book> booksByGenre = new ArrayList<>();
-        String title = searchQuery.getTitle();
-        if(searchQuery.getTitle().length() > 0){
-            booksByTitle.addAll(bookRepository.searchBooksByTitle(searchQuery.getTitle()));
-            if(searchQuery.getAuthorName().length() > 0){
-                booksByAuthor.addAll(authorService.getAuthorByName(searchQuery.getAuthorName()).getBooks());
-                if(searchQuery.getGenre().length() > 0){
-                    booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(searchQuery.getGenre().toUpperCase())));
+    public List < Book > searchBooks(String title, String authorName, String genre) throws SQLException {
+        List < Book > result = new ArrayList < > ();
+        List < Book > booksByTitle = new ArrayList < > ();
+        List < Book > booksByAuthor = new ArrayList < > ();
+        List < Book > booksByGenre = new ArrayList < > ();
+        if (title.length() > 0 && !title.equals("undefined")) { // optimize
+            booksByTitle.addAll(bookRepository.findBooksByTitleContaining(title));
+            if (authorName.length() > 0 && !authorName.equals("undefined")) {
+                booksByAuthor.addAll(bookRepository.findBooksByAuthor(authorService.getAuthorByName(authorName).getId()));
+                if (genre.length() > 0 && !genre.equals("undefined")) {
+                    booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(genre.toUpperCase())));
                     booksByTitle.retainAll(booksByAuthor);
                     booksByTitle.retainAll(booksByGenre);
-                }
-                else{
+                } else {
                     booksByTitle.retainAll(booksByAuthor);
                 }
                 result = booksByTitle;
-            }
-            else if(searchQuery.getGenre().length() > 0){
-                booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(searchQuery.getGenre().toUpperCase())));
+            } else if (genre.length() > 0 && !genre.equals("undefined")) {
+                booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(genre.toUpperCase())));
                 booksByTitle.retainAll(booksByGenre);
             }
             result = booksByTitle;
-        }
-        else if(searchQuery.getAuthorName().length() > 0 && authorService.getAuthorByName(searchQuery.getAuthorName()) != null){
-            booksByAuthor.addAll(authorService.getAuthorByName(searchQuery.getAuthorName()).getBooks());
-            if(searchQuery.getGenre().length() > 0){
-                booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(searchQuery.getGenre().toUpperCase())));
+        } else if (authorName.length() > 0 && authorService.getAuthorByName(authorName) != null && !authorName.equals("undefined")) {
+            booksByAuthor.addAll(bookRepository.findBooksByAuthor(authorService.getAuthorByName(authorName).getId()));
+            if (genre.length() > 0 && !genre.equals("undefined")) {
+                booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(genre.toUpperCase())));
                 booksByAuthor.retainAll(booksByGenre);
             }
             result = booksByAuthor;
-        }
-        else if(searchQuery.getGenre().length() > 0){
-            booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(searchQuery.getGenre().toUpperCase())));
+        } else if (genre.length() > 0 && !genre.equals("undefined")) {
+            booksByGenre.addAll(bookRepository.findByGenre(Genre.valueOf(genre.toUpperCase())));
             result = booksByGenre;
         }
         return result;

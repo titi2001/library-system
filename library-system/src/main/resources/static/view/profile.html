@@ -1,36 +1,49 @@
-<div style="text-align: center;"><h3 style="text-align: center">{{user.username}}</h3>
-<p>You have started {{user.startedBooks.length}} books</p>
-<p>You have read {{user.finishedBooks.length}} books</p>
-<p>You have downloaded {{user.downloadedBooks.length}} books</p>
-<p>You have saved {{user.quotes.length}} quotes</p>
-<p>You have made {{user.bookLists.length}} book lists!</p>
+<div class = "header">
+    <div class="toolbarContent">
+        <i class="fa fas fa-times toolbarIcon" id="backButton" ng-click="goBack()"></i>
+    </div>
+    <div class="toolbarContent">
+        <i class="fa fas fa-user toolbarIcon" id="userButton" ng-click="goToProfile()"></i>
+    </div>
+</div>
+<div style="text-align: center;" ng-init="getUser()" class="content">
+    <img src="{{user.profilePictureUrl}}" id="profileImage">
+    <h3 style="text-align: center;">{{user.username}}</h3>
+    <p>You have started {{user.startedBooks.length}} books</p>
+    <p>You have read {{user.finishedBooks.length}} books</p>
+    <p>You have downloaded {{user.downloadedBooks.length}} books</p>
+    <p>You have saved {{user.quotes.length}} quotes</p>
+    <p>You have made {{user.bookLists.length}} book lists!</p>
 
-<div *ngIf="user.shareActivity == true; then thenBlock else elseBlock"></div>
-<label ng-if="user.shareActivity == true">Stop automatically sharing activity on Twitter!</label>
-<label ng-if="user.shareActivity == false">Automatically share activity on Twitter!</label>
-<input type="checkbox" id="shareActivity" name="shareActivity" ng-click="toggleShareActivity()"></div>
+    <div *ngIf="user.shareActivity == true; then thenBlock else elseBlock"></div>
+    <label ng-if="user.shareActivity == true">Stop automatically sharing activity on Twitter!</label>
+    <label ng-if="user.shareActivity == false">Automatically share activity on Twitter!</label>
+    <input type="checkbox" id="shareActivity" name="shareActivity" ng-click="toggleShareActivity()" />
+</div>
+
+
+
 <div class="row">
     <div class="col-md-8" style="width: 50%;">
         <h3 style="text-align: center;">Quotes:</h3>
         <div class="row" ng-repeat="quote in user.quotes">
             <div class="quote-box">
                 <div class="quote-text">
-                    <i class="fa fa-quote-left" style="font-size: 2em;"> </i> <br><span>{{quote.content}}</span>
+                    <i class="fa fa-quote-left" style="font-size: 2em;"> </i> <br />
+                    <span>{{quote.content}}</span>
                 </div>
                 <div class="quote-author">
                     <span><b>{{quote.book.title}}</b></span>
                 </div>
             </div>
-
         </div>
     </div>
-    <div class="col-md-8"  style="width: 50%;">
+    <div class="col-md-8" style="width: 50%;">
         <h3 style="text-align: center;">Book Lists:</h3>
         <div class="row" ng-repeat="booklist in user.bookLists">
             <div ng-click="openBookList(booklist.id)" style="text-align: center;">
-                    <h4>{{booklist.title}}</h4>
+                <h4>{{booklist.title}}</h4>
             </div>
-
         </div>
     </div>
 </div>

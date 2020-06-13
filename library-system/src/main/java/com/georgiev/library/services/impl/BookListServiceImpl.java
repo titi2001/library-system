@@ -11,6 +11,7 @@ import com.georgiev.library.services.interfaces.IBookListService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class BookListServiceImpl implements IBookListService {
@@ -29,12 +30,10 @@ public class BookListServiceImpl implements IBookListService {
         BookList b = new BookList();
         b.setTitle(bookList.getTitle());
         b.setUser(userRepository.findById(bookList.getUserId()));
-        b.setBooks(new HashSet<>());
-        if(bookRepository.findById(bookList.getBookId()) != null){
-        Book book = bookRepository.findById(bookList.getBookId());
-        book.getBookLists().add(b);
-        b.getBooks().add(book);
-        return bookRepository.save(book) != null;
+        b.setBooks(new HashSet < > ());
+        if (bookRepository.findById(bookList.getBookId()) != null) {
+            Book book = bookRepository.findById(bookList.getBookId());
+            b.getBooks().add(book);
         }
         return bookListRepository.save(b) != null;
     }
@@ -49,11 +48,6 @@ public class BookListServiceImpl implements IBookListService {
     public boolean deleteBookList(int id) {
         long test = bookListRepository.count();
         BookList bookList = bookListRepository.findById(id);
-        for (Book book:
-             bookList.getBooks()) {
-            book.getBookLists().remove(bookList);
-            bookRepository.save(book);
-        }
         User user = bookList.getUser();
         user.getBookLists().remove(bookList);
         userRepository.save(user);
@@ -64,6 +58,11 @@ public class BookListServiceImpl implements IBookListService {
     @Override
     public BookList getBookList(int id) {
         return bookListRepository.findById(id);
+    }
+
+    @Override
+    public List < BookList > getBookListsByBook(int bookId) {
+        return bookListRepository.findBookListsByBook(bookId);
     }
 
 }

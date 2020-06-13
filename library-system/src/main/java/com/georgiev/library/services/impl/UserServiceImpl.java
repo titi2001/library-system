@@ -13,7 +13,6 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
     private UserRepository userRepository;
     private BookRepository bookRepository;
-    private User user;
     public UserServiceImpl(UserRepository userRepository, BookRepository bookRepository) {
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
@@ -23,12 +22,12 @@ public class UserServiceImpl implements IUserService {
     public boolean createUser(String username) {
         User u = new User();
         u.setUsername(username);
-        u.setBookLists(new HashSet<>());
-        u.setQuotes(new HashSet<>());
+        u.setBookLists(new HashSet < > ());
+        u.setQuotes(new HashSet < > ());
         u.setShareActivity(false);
-        u.setDownloadedBooks(new HashSet<>());
-        u.setStartedBooks(new HashSet<>());
-        u.setFinishedBooks(new HashSet<>());
+        u.setDownloadedBooks(new HashSet < > ());
+        u.setStartedBooks(new HashSet < > ());
+        u.setFinishedBooks(new HashSet < > ());
         return userRepository.save(u) != null;
     }
 
@@ -44,8 +43,9 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User getUserByUsername(String username) {
-        if(userRepository.existsByUsername(username)){
-        return userRepository.findByUsername(username);}
+        if (userRepository.existsByUsername(username)) {
+            return userRepository.findByUsername(username);
+        }
         return null;
     }
 
@@ -55,17 +55,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List < User > getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User getUser() {
-        if(this.user != null){
-        this.user = userRepository.findById(this.user.getId());}
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

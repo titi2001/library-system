@@ -1,5 +1,6 @@
 package com.georgiev.library.repositories;
 
+import com.georgiev.library.entities.Author;
 import com.georgiev.library.entities.Book;
 import com.georgiev.library.pojo.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,11 +14,11 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book,Integer> {
     Book findByTitle(String title);
     Book findById(int id);
-    List<Book> findByGenre(Genre genre);
-    List<Book> findBooksByTitle(String title);
     @Query(
-            value = "SELECT * FROM librarysystem.books WHERE books.title LIKE CONCAT('%',:title , '%')",
+            value = "SELECT * FROM books INNER JOIN book_author ON book_author.author_id = :id AND book_id = id",
             nativeQuery = true
     )
-    List<Book> searchBooksByTitle(@Param("title") String title);
+    List<Book> findBooksByAuthor(@Param("id") int id);
+    List<Book> findByGenre(Genre genre);
+    List<Book> findBooksByTitleContaining(String title);
 }

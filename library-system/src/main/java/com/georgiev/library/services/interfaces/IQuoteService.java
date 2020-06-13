@@ -10,5 +10,6 @@ public interface IQuoteService {
     boolean deleteQuote(int id);
     Quote getQuote(int id);
     List<Quote> getAllQuotes();
+    List<Quote> getQuotesFromBook(int bookId);
 
 }

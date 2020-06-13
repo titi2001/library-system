@@ -10,8 +10,7 @@ public class Quote {
     private Book book;
     private User user;
 
-    public Quote() {
-    }
+    public Quote() {}
 
     public Quote(int id, String content, Book book, User user) {
         this.id = id;
@@ -39,7 +38,7 @@ public class Quote {
     }
 
     @ManyToOne
-    @JoinColumn(name="book_id", nullable=false)
+    @JoinColumn(name = "book_id", nullable = false)
     public Book getBook() {
         return book;
     }
@@ -49,7 +48,7 @@ public class Quote {
     }
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     public User getUser() {
         return user;
     }

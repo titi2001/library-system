@@ -25,12 +25,8 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public boolean createAuthor(AddAuthor author) {
-        Set<Book> books = new HashSet<>();
-        for (Book book:
-             author.getBooks()) {
-            books.add(book);
-        }
-        Author a = new Author(author.getName(), books);
+        Set < Book > books = new HashSet < > ();
+        Author a = new Author(author.getName());
         return authorRepository.save(a) != null;
     }
 
@@ -47,7 +43,7 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public Optional<Author> getAuthor(int id) {
+    public Optional < Author > getAuthor(int id) {
         return authorRepository.findById(id);
     }
 

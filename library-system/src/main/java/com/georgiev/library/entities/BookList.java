@@ -10,10 +10,9 @@ public class BookList {
     private String title;
     private User user;
 
-    private Set<Book> books;
+    private Set < Book > books;
 
-    public BookList() {
-    }
+    public BookList() {}
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
@@ -33,7 +32,7 @@ public class BookList {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     public User getUser() {
         return user;
     }
@@ -42,23 +41,31 @@ public class BookList {
         this.user = user;
     }
 
-    @ManyToMany(mappedBy = "bookLists",  fetch = FetchType.EAGER)
-    public Set<Book> getBooks() {
+    @ManyToMany(cascade = {
+            CascadeType.MERGE
+    }, fetch = FetchType.EAGER)
+    @JoinTable(name = "bookList_book",
+            joinColumns = {
+                    @JoinColumn(name = "bookList_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "book_id")
+            })
+    public Set < Book > getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(Set < Book > books) {
         this.books = books;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
 
-        if(this == obj)
+        if (this == obj)
             return true;
 
-        if(obj == null || obj.getClass()!= this.getClass())
+        if (obj == null || obj.getClass() != this.getClass())
             return false;
 
         BookList bookList = (BookList) obj;
@@ -66,8 +73,7 @@ public class BookList {
     }
 
     @Override
-    public int hashCode()
-    {
-        return this.id * 173 + this.title.length();
+    public int hashCode() {
+        return this.id * 173;
     }
 }

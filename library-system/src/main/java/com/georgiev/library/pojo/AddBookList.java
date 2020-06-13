@@ -1,5 +1,4 @@
 package com.georgiev.library.pojo;
-import java.util.List;
 
 public class AddBookList {
     private String title;
@@ -12,8 +11,7 @@ public class AddBookList {
         this.bookId = bookId;
     }
 
-    public AddBookList() {
-    }
+    public AddBookList() {}
 
     public String getTitle() {
         return title;

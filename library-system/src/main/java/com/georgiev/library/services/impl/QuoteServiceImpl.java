@@ -40,9 +40,6 @@ public class QuoteServiceImpl implements IQuoteService {
         User user = quote.getUser();
         user.getQuotes().remove(quote);
         userRepository.save(user);
-        Book book = quote.getBook();
-        book.getQuotes().remove(quote);
-        bookRepository.save(book);
         quoteRepository.deleteById(id);
         return quoteRepository.count() == test - 1;
     }
@@ -53,8 +50,13 @@ public class QuoteServiceImpl implements IQuoteService {
     }
 
     @Override
-    public List<Quote> getAllQuotes() {
+    public List < Quote > getAllQuotes() {
         return quoteRepository.findAll();
+    }
+
+    @Override
+    public List<Quote> getQuotesFromBook(int bookId) {
+        return quoteRepository.findByBookId(bookId);
     }
 
 

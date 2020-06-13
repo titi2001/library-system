@@ -1,6 +1,12 @@
-<form id = "search">
-    <input type="text" name="title" ng-model="searchForm.title" placeholder="Title"/>
-    <input type="text" name="authorName" ng-model="searchForm.authorName" placeholder="Author"/>
+<div class = "header">
+    <div class="toolbarContent">
+        <i class="fa fas fa-user toolbarIcon" id="userButton" ng-click="goToProfile()"></i>
+    </div>
+</div>
+<div class="content">
+<form id="search">
+    <input type="text" name="title" ng-model="searchForm.title" placeholder="Title" />
+    <input type="text" name="authorName" ng-model="searchForm.authorName" placeholder="Author" />
     <select ng-model="searchForm.genre" placeholder="Genre:">
         <option value=""></option>
         <option value="fantasy">Fantasy</option>
@@ -11,40 +17,44 @@
         <option value="mystery">Mystery</option>
         <option value="detective">Detective</option>
         <option value="dystopia">Dystopia</option>
+        <option value="other">Other</option>
     </select>
     <button type="button" ng-click="searchBooks()">Search Books!</button>
 </form>
-<div>
+<div ng-init="getBooks()">
     <center>
         <div class="col-sm-3" ng-repeat="book in books">
-            <figure class='book' ng-click="readMode(book.id,0)">
-                <ul class='hardcover_front'>
+            <!-- margin 0 auto -->
+            <figure class="book" ng-click="readMode(book.id,0)">
+                <ul class="hardcover_front">
                     <li>
-                        <img src="../bookFiles/images/{{book.imageName}}" alt="" width="100%" height="100%">
+                        <img src="../bookFiles/images/{{book.imageName}}" alt="" width="100%" height="100%" />
                     </li>
                     <li></li>
                 </ul>
-                <ul class='page'>
-                    <li></li>
-                    <li>
-                    </li>
+                <ul class="page">
                     <li></li>
                     <li></li>
                     <li></li>
-                </ul>
-                <ul class='hardcover_back'>
                     <li></li>
                     <li></li>
                 </ul>
-                <ul class='book_spine'>
+                <ul class="hardcover_back">
+                    <li></li>
+                    <li></li>
+                </ul>
+                <ul class="book_spine">
                     <li></li>
                     <li></li>
                 </ul>
             </figure>
             <div>
                 <h3>{{book.title}}</h3>
-                <span ng-repeat="author in book.authors">{{author.name}}<br></span>
+                <span ng-repeat="author in book.authors">{{author.name}}<br /></span>
                 <p>{{book.description}}</p>
                 <p>{{book.genre}}</p>
-        </div></center>
+            </div>
+        </div>
+    </center>
+</div>
 </div>

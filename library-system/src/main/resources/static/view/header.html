@@ -1,19 +1,18 @@
-
-<div class = "toolbarContent">
-    <i class="fa fas fa-times toolbarIcon" id = "backButton" ng-click="goBack()" style="display: none;"></i>
+<div class="toolbarContent">
+    <i class="fa fas fa-times toolbarIcon" id="backButton" ng-click="goBack()" ng-show="!isActive('/books')"></i>
 </div>
-<div class = "toolbarContent">
-    <i class="fa fas fa-download toolbarIcon readIcon" id = "downloadButton" ng-click="downloadBook(bookId)"></i>
+<div class="toolbarContent">
+    <i class="fa fas fa-download toolbarIcon readIcon" id="downloadButton" ng-click="downloadBook(bookId)" ng-show="isActive('/read')"></i>
 </div>
-<div class = "toolbarContent">
-    <i class="fa fas fa-list toolbarIcon readIcon" id = "listButton" data-toggle="modal" data-target="#bookListModal"></i>
+<div class="toolbarContent">
+    <i class="fa fas fa-list toolbarIcon readIcon" id="listButton" data-toggle="modal" data-target="#bookListModal" ng-show="isActive('/read')"></i>
 </div>
-<div class = "toolbarContent">
-    <i class="fa fas fa-quote-right toolbarIcon readIcon" ng-click="addQuote()" id = "quoteButton"></i>
+<div class="toolbarContent">
+    <i class="fa fas fa-quote-right toolbarIcon readIcon" ng-click="addQuote()" id="quoteButton" ng-show="isActive('/read')"></i>
 </div>
-<div class = "toolbarContent">
-    <i class="fa fab fa-wikipedia-w toolbarIcon readIcon" ng-click="searchInWikipedia()" id = "wikipediaButton"></i>
+<div class="toolbarContent">
+    <i class="fa fab fa-wikipedia-w toolbarIcon readIcon" ng-click="searchInWikipedia()" id="wikipediaButton" ng-show="isActive('/read')"></i>
 </div>
-<div class = "toolbarContent">
-    <i class="fa fas fa-user toolbarIcon" id = "userButton" ng-click="goToProfile()"></i>
+<div class="toolbarContent">
+    <i class="fa fas fa-user toolbarIcon" id="userButton" ng-click="goToProfile()"></i>
 </div>

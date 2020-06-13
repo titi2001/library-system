@@ -1,12 +1,13 @@
 package com.georgiev.library.controllers;
 
-import com.georgiev.library.entities.Author;
-import com.georgiev.library.entities.Book;
 import com.georgiev.library.entities.BookList;
 import com.georgiev.library.pojo.*;
 import com.georgiev.library.services.impl.BookListServiceImpl;
 import com.georgiev.library.services.impl.BookServiceImpl;
 import com.georgiev.library.services.impl.UserServiceImpl;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -27,43 +28,50 @@ public class BookListController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/get/{id}")
-    public BookList getBookList(@PathVariable("id") String id){
-        BookList bookList = bookListService.getBookList(Integer.parseInt(id));
-        bookList.setUser(null);
-        for (Book book:
-             bookList.getBooks()) {
-            book.setQuotes(null);
-            book.setBookLists(null);
-            for (Author author:
-                 book.getAuthors()) {
-                author.setBooks(null);
+    public boolean isAuthenticated(String token) {
+        Jws < Claims > jwt = Jwts.parser()
+                .setSigningKey("")
+                .parseClaimsJws(token);
+        return userService.getUser(Integer.parseInt((String) jwt.getBody().get("id"))) != null;
+    }
+
+    @GetMapping("/{id}")
+    public BookList getBookList(@PathVariable("id") String id, @RequestParam("token") String token) {
+        if (isAuthenticated(token)) {
+            BookList bookList = bookListService.getBookList(Integer.parseInt(id));
+            bookList.setUser(null);
+            return bookList;
+        }
+        return null;
+    }
+
+    @PostMapping("/")
+    public ResponseEntity < ? > addBookList(@RequestBody AddBookList bookList, @RequestParam("token") String token) throws Exception {
+        Jws < Claims > jwt = Jwts.parser()
+                .setSigningKey("")
+                .parseClaimsJws(token);
+        if (userService.getUser(Integer.parseInt((String) jwt.getBody().get("id"))) != null) {
+            bookList.setUserId(Integer.parseInt((String) jwt.getBody().get("id")));
+            if (bookListService.createBookList(bookList)) {
+                LOGGER.info(bookList.getTitle() + " (book list) created");
+                return new ResponseEntity < String > ("Uploaded", HttpStatus.OK);
             }
         }
-        return bookList;
+        return new ResponseEntity < String > ("Error", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addBookList(@RequestBody AddBookList bookList) throws Exception {
-        if(bookListService.createBookList(bookList)){
-            LOGGER.info(bookList.getTitle() + " (book list) created");
-            return new ResponseEntity<String>("Uploaded", HttpStatus.OK);
+    @PutMapping("/")
+    public ResponseEntity < ? > addBookToBookList(@RequestParam("bookListId") String bookListId, @RequestParam("bookId") String bookId, @RequestParam("token") String token) {
+        if (isAuthenticated(token)) {
+            BookList bookList = bookListService.getBookList(Integer.parseInt(bookListId));
+            bookList.getBooks().add(bookService.getBook(Integer.parseInt(bookId)));
+            if (bookListService.editBookList(bookList)) {
+                LOGGER.info(bookService.getBook(Integer.parseInt(bookId)).getTitle() + " added to book list " + bookList.getTitle());
+                return new ResponseEntity < String > ("Uploaded", HttpStatus.OK);
+            }
+            LOGGER.info(bookService.getBook(Integer.parseInt(bookId)).getTitle() + "not added to book list " + bookList.getTitle());
         }
-        return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
-    }
-
-    @PutMapping("/addBookToBookList/{bookListId}/{bookId}")
-    public ResponseEntity<?> addBookToBookList(@PathVariable("bookListId") String bookListId, @PathVariable("bookId") String bookId){
-        BookList bookList = bookListService.getBookList(Integer.parseInt(bookListId));
-        Book book = bookService.getBook(Integer.parseInt(bookId));
-        bookList.getBooks().add(bookService.getBook(Integer.parseInt(bookId)));
-        book.getBookLists().add(bookList);
-        if(bookService.editBook(book)){
-            LOGGER.info(bookService.getBook(Integer.parseInt(bookId)).getTitle() + " added to book list " + bookList.getTitle());
-            return new ResponseEntity<String>("Uploaded", HttpStatus.OK);
-        }
-        LOGGER.info(bookService.getBook(Integer.parseInt(bookId)).getTitle() + "not added to book list " + bookList.getTitle());
-        return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity < String > ("Error", HttpStatus.BAD_REQUEST);
     }
 
 

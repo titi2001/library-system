@@ -9,16 +9,21 @@ import java.util.Set;
 public class User {
     private int id;
     private String username;
-    private Set<Quote> quotes = new HashSet<>();
-    private Set<BookList> bookLists = new HashSet<>();
+    private String profilePictureUrl;
+    private String accessToken;
+    private String accessTokenSecret;
+    private Set < Quote > quotes = new HashSet < > ();
+    private Set < BookList > bookLists = new HashSet < > ();
     private boolean shareActivity;
-    private Set<Book> startedBooks = new HashSet<>();
-    private Set<Book> finishedBooks = new HashSet<>();
-    private Set<Book> downloadedBooks = new HashSet<>();
+    private Set < Book > startedBooks = new HashSet < > ();
+    private Set < Book > finishedBooks = new HashSet < > ();
+    private Set < Book > downloadedBooks = new HashSet < > ();
 
-    public User(int id, String username, Set<Quote> quotes, Set<BookList> bookLists, boolean shareActivity, Set<Book> startedBooks, Set<Book> finishedBooks, Set<Book> downloadedBooks) {
-        this.id = id;
+    public User(String username, String profilePictureUrl, String accessToken, String accessTokenSecret, Set < Quote > quotes, Set < BookList > bookLists, boolean shareActivity, Set < Book > startedBooks, Set < Book > finishedBooks, Set < Book > downloadedBooks) {
         this.username = username;
+        this.profilePictureUrl = profilePictureUrl;
+        this.accessToken = accessToken;
+        this.accessTokenSecret = accessTokenSecret;
         this.quotes = quotes;
         this.bookLists = bookLists;
         this.shareActivity = shareActivity;
@@ -27,8 +32,7 @@ public class User {
         this.downloadedBooks = downloadedBooks;
     }
 
-    public User() {
-    }
+    public User() {}
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
@@ -47,21 +51,21 @@ public class User {
         this.username = username;
     }
 
-    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
-    public Set<Quote> getQuotes() {
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    public Set < Quote > getQuotes() {
         return quotes;
     }
 
-    public void setQuotes(Set<Quote> quotes) {
+    public void setQuotes(Set < Quote > quotes) {
         this.quotes = quotes;
     }
 
-    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
-    public Set<BookList> getBookLists() {
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    public Set < BookList > getBookLists() {
         return bookLists;
     }
 
-    public void setBookLists(Set<BookList> bookLists) {
+    public void setBookLists(Set < BookList > bookLists) {
         this.bookLists = bookLists;
     }
 
@@ -75,55 +79,89 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_startedBooks",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "book_id") })
-    public Set<Book> getStartedBooks() {
+            joinColumns = {
+                    @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "book_id")
+            })
+    public Set < Book > getStartedBooks() {
         return startedBooks;
     }
 
-    public void setStartedBooks(Set<Book> startedBooks) {
+    public void setStartedBooks(Set < Book > startedBooks) {
         this.startedBooks = startedBooks;
     }
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_finishedBooks",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "book_id") })
-    public Set<Book> getFinishedBooks() {
+            joinColumns = {
+                    @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "book_id")
+            })
+    public Set < Book > getFinishedBooks() {
         return finishedBooks;
     }
 
-    public void setFinishedBooks(Set<Book> finishedBooks) {
+    public void setFinishedBooks(Set < Book > finishedBooks) {
         this.finishedBooks = finishedBooks;
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_downloadedBooks",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "book_id") })
-    public Set<Book> getDownloadedBooks() {
+            joinColumns = {
+                    @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "book_id")
+            })
+    public Set < Book > getDownloadedBooks() {
         return downloadedBooks;
     }
 
-    public void setDownloadedBooks(Set<Book> downloadedBooks) {
+    public void setDownloadedBooks(Set < Book > downloadedBooks) {
         this.downloadedBooks = downloadedBooks;
     }
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if(this == obj)
-            return true;
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
 
-        if(obj == null || obj.getClass()!= this.getClass())
-            return false;
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
 
-        User user = (User) obj;
-        return (user.id == this.id && user.getUsername().equals(this.username) && new HashSet<>(user.getBookLists()).equals(new HashSet<>(this.bookLists)) && new HashSet<>(user.getQuotes()).equals(new HashSet<>(this.quotes)));
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getAccessTokenSecret() {
+        return accessTokenSecret;
+    }
+
+    public void setAccessTokenSecret(String accessTokenSecret) {
+        this.accessTokenSecret = accessTokenSecret;
     }
 
     @Override
-    public int hashCode()
-    {
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null || obj.getClass() != this.getClass())
+            return false;
+
+        User user = (User) obj;
+        return (user.id == this.id && user.getUsername().equals(this.username) && new HashSet < > (user.getBookLists()).equals(new HashSet < > (this.bookLists)) && new HashSet < > (user.getQuotes()).equals(new HashSet < > (this.quotes)));
+    }
+
+    @Override
+    public int hashCode() {
         return this.id * username.length();
     }
 }

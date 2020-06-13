@@ -11,17 +11,14 @@ public class Book {
     private int id;
     private String title;
     private String description;
-    private Set<Author> authors;
+    private Set < Author > authors;
     @Enumerated(EnumType.STRING)
     private Genre genre;
     private String imageName;
     private String fileName;
-    private Set<BookList> bookLists;
-    private Set<Quote> quotes;
-    public Book() {
-    }
+    public Book() {}
 
-    public Book(int id, String title, String description, Set<Author> authors, Genre genre, String imageName, String fileName, Set<BookList> bookLists, Set<Quote> quotes) {
+    public Book(int id, String title, String description, Set < Author > authors, Genre genre, String imageName, String fileName) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -29,8 +26,6 @@ public class Book {
         this.genre = genre;
         this.imageName = imageName;
         this.fileName = fileName;
-        this.bookLists = bookLists;
-        this.quotes = quotes;
     }
 
     @Id
@@ -60,17 +55,21 @@ public class Book {
         this.description = description;
     }
 
-    @ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "Book_Author",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "author_id") }
-    )
-    public Set<Author> getAuthors() {
+    @ManyToMany(cascade = {
+            CascadeType.MERGE
+    }, fetch = FetchType.EAGER)
+    @JoinTable(name = "book_author",
+            joinColumns = {
+                    @JoinColumn(name = "book_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "author_id")
+            })
+    public Set < Author > getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(Set < Author > authors) {
         this.authors = authors;
     }
 
@@ -98,37 +97,13 @@ public class Book {
         this.fileName = fileName;
     }
 
-    @ManyToMany(cascade = { CascadeType.MERGE },  fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "Book_BookLists",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "bookList_id") }
-    )
-    public Set<BookList> getBookLists() {
-        return bookLists;
-    }
-
-    public void setBookLists(Set<BookList> bookLists) {
-        this.bookLists = bookLists;
-    }
-
-    @OneToMany(mappedBy="book",  fetch = FetchType.EAGER)
-    public Set<Quote> getQuotes() {
-        return quotes;
-    }
-
-    public void setQuotes(Set<Quote> quotes) {
-        this.quotes = quotes;
-    }
-
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
 
-        if(this == obj)
+        if (this == obj)
             return true;
 
-        if(obj == null || obj.getClass()!= this.getClass())
+        if (obj == null || obj.getClass() != this.getClass())
             return false;
 
         Book book = (Book) obj;
@@ -136,9 +111,7 @@ public class Book {
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.id * title.length();
     }
 }
-

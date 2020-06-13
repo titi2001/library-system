@@ -10,8 +10,7 @@ public class AddQuote {
         this.userId = userId;
     }
 
-    public AddQuote() {
-    }
+    public AddQuote() {}
 
     public String getContent() {
         return content;

@@ -1,4 +1,44 @@
-<div id = "buttonHolder">
-    <i class="fa fas fa-caret-left pageButton" ng-click="readMode(bookId,chapter-1)" id = "prevButton"></i>
-    <i class="fa fas fa-caret-right pageButton" ng-click="readMode(bookId,chapter+1)" id = "nextButton"></i></div>
-<p id="theContainer" ng-click="getSelectedText()"></p>
+<div class = "header">
+    <div class="toolbarContent">
+        <i class="fa fas fa-times toolbarIcon" id="backButton" ng-click="goBack()"></i>
+    </div>
+    <div class="toolbarContent">
+        <i class="fa fas fa-download toolbarIcon readIcon" id="downloadButton" ng-click="downloadBook(bookId)"></i>
+    </div>
+    <div class="toolbarContent">
+        <i class="fa fas fa-list toolbarIcon readIcon" id="listButton" data-toggle="modal" data-target="#bookListModal"></i>
+    </div>
+    <div class="toolbarContent">
+        <i class="fa fas fa-quote-right toolbarIcon readIcon" ng-click="addQuote()" id="quoteButton" ></i>
+    </div>
+    <div class="toolbarContent">
+        <i class="fa fab fa-wikipedia-w toolbarIcon readIcon" ng-click="searchInWikipedia()" id="wikipediaButton"></i>
+    </div>
+    <div class="toolbarContent">
+        <i class="fa fas fa-user toolbarIcon" id="userButton" ng-click="goToProfile()"></i>
+    </div>
+</div>
+
+<div id="buttonHolder">
+    <i class="fa fas fa-caret-left pageButton" ng-click="readMode(bookId,chapter-1)" id="prevButton"></i>
+    <i class="fa fas fa-caret-right pageButton" ng-click="readMode(bookId,chapter+1)" id="nextButton"></i>
+</div>
+<p id="theContainer" ng-click="getSelectedText()" class="content"></p>
+<div class="modal fade" id="bookListModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div ng-repeat="bookList in user.bookLists">
+                    <button ng-click="addBookToBookList(bookList.id, bookId)">{{bookList.title}}</button>
+                </div>
+                <form>
+                    <input type="text" name="title" ng-model="bookListForm.title" placeholder="Title:"/>
+                    <button type="button" ng-click="addBookList()">Create Book List</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
